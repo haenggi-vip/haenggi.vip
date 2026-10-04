@@ -1,5 +1,6 @@
 (() => {
 'use strict';
+const english=document.documentElement.lang==='en';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const cards=[...document.querySelectorAll('.app-card')];
 const button=document.querySelector('#motion-toggle');
@@ -38,7 +39,7 @@ function render(){
  cards.forEach(card=>{const p=paused||reduced.matches?1:clamp((innerHeight-card.getBoundingClientRect().top)/(innerHeight*.26));card.style.opacity=.65+.35*p;card.style.transform=`perspective(1000px) translateY(${(1-p)*18}px) rotateX(${(1-p)*3}deg)`;});
 }
 function schedule(){if(!pending){pending=true;requestAnimationFrame(render);}}
-function applyMotion(){const off=paused||reduced.matches;document.body.classList.toggle('motion-off',off);button.setAttribute('aria-pressed',String(off));button.disabled=reduced.matches;button.textContent=reduced.matches?'Bewegung reduziert (System)':off?'Scroll-Animation aktivieren':'Bewegung reduzieren';engine?.layout();loadVideo();schedule();}
+function applyMotion(){const off=paused||reduced.matches;document.body.classList.toggle('motion-off',off);button.setAttribute('aria-pressed',String(off));button.disabled=reduced.matches;button.textContent=english?(reduced.matches?'Motion reduced (system)':off?'Enable scroll animation':'Reduce motion'):(reduced.matches?'Bewegung reduziert (System)':off?'Scroll-Animation aktivieren':'Bewegung reduzieren');engine?.layout();loadVideo();schedule();}
 button.addEventListener('click',()=>{paused=!paused;try{localStorage.setItem('haenggi-reduced-motion',String(paused));}catch{}applyMotion();});
 reduced.addEventListener('change',()=>{applyMotion();});
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});
@@ -47,7 +48,7 @@ const filters=[...document.querySelectorAll('[data-filter]')];
 function filterApps(value){
  published.forEach(card=>card.hidden=value!=='all'&&!card.dataset.platforms.split(' ').includes(value));
  filters.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===value)));
- document.querySelector('#result-count').textContent=`${published.filter(card=>!card.hidden).length} Apps`;
+ document.querySelector('#result-count').textContent=`${published.filter(card=>!card.hidden).length} ${english?'apps':'Apps'}`;
  ['engineering','digital'].forEach(id=>{const section=document.getElementById(id);section.hidden=![...section.querySelectorAll('[data-platforms]')].some(card=>!card.hidden);});
  schedule();
 }
