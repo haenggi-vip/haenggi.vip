@@ -15,3 +15,6 @@
 /* Language links remain usable without JavaScript. */
 .site-header nav{margin-left:auto}.language-switch{display:flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:24px;background:#080c1380}.language-switch a{display:grid;place-items:center;min-width:38px;min-height:38px;border-radius:20px;font:11px ui-monospace,monospace;color:var(--muted)}.language-switch a[aria-current=page]{background:#d9eeee;color:#11232b}.language-switch a:hover{box-shadow:inset 0 0 0 1px var(--cyan)}
 @media(max-width:600px){.site-header{gap:12px}.site-header nav{gap:10px}.site-header nav a:last-child{display:none}.language-switch a{min-width:34px;min-height:38px}.language-switch{flex-shrink:0}}
+
+.hero-bottom{position:relative}.hero-motion{position:absolute;right:0;bottom:65px;background:rgba(8,12,19,.8)}
+@media(max-width:600px){.hero-motion{bottom:auto;top:-56px;right:0;width:auto;min-height:40px;font-size:11px}}

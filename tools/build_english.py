@@ -5,6 +5,7 @@ root=Path(__file__).resolve().parents[1]
 s=(root/'index.html').read_text()
 translations={
 'Apps und PCB-Werkzeuge':'Apps and PCB tools',
+'Scroll-Video pausieren':'Pause scroll video',
 '>5 Apps<':'>5 apps<',
 'Entdecke IDX-Viewer, OpenCommander, TravelTrack, OpenGames und OpenGroove: Werkzeuge für PCB, Dateien, Reisen, Brettspiele und Musik mit direkten App-Links.':'Discover IDX-Viewer, OpenCommander, TravelTrack, OpenGames and OpenGroove: apps for PCBs, files, travel, board games and music, with direct download links.',
 'Mechanische Struktur aus dem Hintergrundfilm von haenggi.vip':'Mechanical structure from the haenggi.vip background film',
