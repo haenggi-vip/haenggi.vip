@@ -1,14 +1,13 @@
 (() => {
 'use strict';
 const english=document.documentElement.lang==='en';
-const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const cards=[...document.querySelectorAll('.app-card')];
 const buttons=[...document.querySelectorAll('[data-motion-toggle],#motion-toggle')];
 const video=document.querySelector('#hero-video');
 let videoFrame=0,videoLoaded=false;
-let savedMotion=null;
-try{const stored=localStorage.getItem("haenggi-reduced-motion");if(stored!==null)savedMotion=stored==="true";}catch{}
-let paused=savedMotion??reduced.matches,pending=false,engine;
+// Every visit starts with the requested cinematic scroll effect enabled.
+// Pausing applies only to the currently open page.
+let paused=false,pending=false,engine;
 const clamp=n=>Math.min(1,Math.max(0,n));
 // The fixed background remains visible beyond the hero. Its timeline therefore
 // follows the entire document, without holding the reader in a pinned intro.
@@ -62,11 +61,9 @@ function applyMotion(){
  engine?.layout();loadVideo();schedule();
 }
 buttons.forEach(button=>button.addEventListener('click',()=>{
- paused=!paused;savedMotion=paused;
- try{localStorage.setItem('haenggi-reduced-motion',String(paused));}catch{}
+ paused=!paused;
  applyMotion();
 }));
-reduced.addEventListener('change',()=>{if(savedMotion===null)paused=reduced.matches;applyMotion();});
 addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule,{passive:true});
 const published=cards.filter(card=>card.dataset.platforms);
 const filters=[...document.querySelectorAll('[data-filter]')];
@@ -80,6 +77,41 @@ function filterApps(value){
 filters.forEach(button=>button.addEventListener('click',()=>filterApps(button.dataset.filter)));
 document.querySelector('.filter-bar').hidden=false;
 document.querySelectorAll('.app-dock a').forEach(link=>link.addEventListener('click',()=>filterApps('all')));
+// Animate internal navigation explicitly so browser/OS smooth-scroll settings
+// cannot turn an Apps click into an immediate anchor jump. Video follows scrollY.
+let navigationFrame=0;
+function cancelNavigation(){cancelAnimationFrame(navigationFrame);navigationFrame=0;}
+['wheel','touchstart','pointerdown'].forEach(event=>addEventListener(event,cancelNavigation,{passive:true}));
+addEventListener('keydown',event=>{if(['Escape','ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key))cancelNavigation();});
+document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{
+ if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+ const target=document.getElementById(link.hash.slice(1));
+ if(!target)return;
+ event.preventDefault();cancelNavigation();
+ if(target.hidden||target.closest('[hidden]'))filterApps('all');
+ const start=scrollY;
+ const offset=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0;
+ const destination=Math.max(0,Math.min(document.documentElement.scrollHeight-innerHeight,start+target.getBoundingClientRect().top-offset));
+ const distance=destination-start;
+ const duration=Math.min(1600,Math.max(850,Math.abs(distance)*.65));
+ const began=performance.now();
+ history.pushState(null,'',link.hash);
+ // Language links retain the same section after switching languages.
+ dispatchEvent(new HashChangeEvent('hashchange'));
+ function step(now){
+  const progress=clamp((now-began)/duration);
+  const eased=progress<.5?4*progress**3:1-(-2*progress+2)**3/2;
+  window.scrollTo({top:start+distance*eased,behavior:'instant'});
+  schedule();
+  if(progress<1)navigationFrame=requestAnimationFrame(step);
+  else{
+   navigationFrame=0;
+   if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');
+   target.focus({preventScroll:true});
+  }
+ }
+ navigationFrame=requestAnimationFrame(step);
+}));
 addEventListener('hashchange',()=>{if(published.some(card=>'#'+card.id===location.hash&&card.hidden))filterApps('all');});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedule();});
 if(window.CoolWebsite)engine=window.CoolWebsite.mount(document.body);
