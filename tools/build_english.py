@@ -31,7 +31,7 @@ translations={
 }
 for de,en in translations.items():s=s.replace(de,en)
 s=s.replace('<html lang="de">','<html lang="en">').replace('"inLanguage": "de"','"inLanguage": "en"').replace('content="de_DE"','content="en_US"')
-s=s.replace('href="styles.css?v=20261013"','href="../styles.css?v=20261013"').replace('href="cool-website.css"','href="../cool-website.css"')
+s=s.replace('href="styles.css?v=20261013-header"','href="../styles.css?v=20261013-header"').replace('href="cool-website.css"','href="../cool-website.css"')
 s=re.sub(r'(src|href|poster|data-scroll-src|data-scroll-src-mobile)="(assets/|config.js|app.js|cool-website.js|language.js)',r'\1="../\2',s)
 s=s.replace('<link rel="canonical" href="https://haenggi.vip/">','<link rel="canonical" href="https://haenggi.vip/en/">').replace('<meta property="og:url" content="https://haenggi.vip/">','<meta property="og:url" content="https://haenggi.vip/en/">')
 s=s.replace('href="./?lang=de" lang="de" hreflang="de" aria-current="page"','href="../?lang=de" lang="de" hreflang="de"').replace('href="en/?lang=en" lang="en" hreflang="en"','href="./?lang=en" lang="en" hreflang="en" aria-current="page"')

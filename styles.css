@@ -30,3 +30,8 @@
 .collection-heading:before,.section-heading:before{border-radius:40px;filter:blur(14px)}
 .filter-bar{background:linear-gradient(90deg,#080c13d9,#080c1366);border-radius:18px 18px 0 0;padding-top:12px}
 @media(max-width:600px){.app-dock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;overflow:visible}.app-dock a{width:auto;min-height:74px}.hero{min-height:570px}.hero-motion{top:-48px}}
+
+/* Persistent navigation, with room for anchor headings underneath. */
+.site-header{position:fixed;z-index:10;padding:16px 5vw;background:rgba(8,12,19,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+html{scroll-padding-top:100px}
+@media(max-width:600px){.site-header{padding:12px 20px}html{scroll-padding-top:90px}}
