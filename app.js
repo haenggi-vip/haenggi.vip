@@ -49,7 +49,7 @@ function render(){
  const progress=clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight));
  document.querySelector('#scroll-value').textContent=Math.round(progress*100);
  document.querySelector('#progress-fill').style.transform=`scaleY(${progress})`;
- cards.forEach(card=>{const p=paused?1:clamp((innerHeight-card.getBoundingClientRect().top)/(innerHeight*.26));card.style.opacity=.65+.35*p;card.style.transform=`perspective(1000px) translateY(${(1-p)*18}px) rotateX(${(1-p)*3}deg)`;});
+ cards.forEach(card=>{const p=paused?1:clamp((innerHeight-card.getBoundingClientRect().top)/(innerHeight*.26));card.style.opacity=1;card.style.transform=`perspective(1000px) translateY(${(1-p)*18}px) rotateX(${(1-p)*3}deg)`;});
 }
 function schedule(){if(!pending){pending=true;requestAnimationFrame(render);}}
 function applyMotion(){

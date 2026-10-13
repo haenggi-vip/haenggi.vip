@@ -4,6 +4,11 @@ import json,re
 root=Path(__file__).resolve().parents[1]
 s=(root/'index.html').read_text()
 translations={
+'Entdecke IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF und openVideo: Apps für Technik, Dateien, Reisen, Spiele, Musik und Dokumente.': 'Discover IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF and openVideo: apps for engineering, files, travel, games, music and documents.',
+'OpenVoice PDF öffnet PDF, TXT, Markdown und HTML. Text aus Scans erkennen und Dokumente mit lokalen Stimmen vorlesen lassen.': 'OpenVoice PDF opens PDF, TXT, Markdown and HTML. Recognize text in scans and listen to documents read aloud with local voices.',
+'openVideo bearbeitet Videos direkt auf dem Gerät. Objekten automatisch folgen, Zoom und Tempo anpassen, Clips schneiden und exportieren.': 'openVideo edits videos on your device. Automatically follow objects, adjust zoom and speed, trim clips and export your videos.',
+'Videoeditor': 'Video editor',
+'>7 Apps<': '>7 apps<',
 'Apps und PCB-Werkzeuge':'Apps and PCB tools',
 'Scroll-Video pausieren':'Pause scroll video',
 '>5 Apps<':'>5 apps<',
@@ -26,7 +31,7 @@ translations={
 }
 for de,en in translations.items():s=s.replace(de,en)
 s=s.replace('<html lang="de">','<html lang="en">').replace('"inLanguage": "de"','"inLanguage": "en"').replace('content="de_DE"','content="en_US"')
-s=s.replace('href="styles.css"','href="../styles.css"').replace('href="cool-website.css"','href="../cool-website.css"')
+s=s.replace('href="styles.css?v=20261013"','href="../styles.css?v=20261013"').replace('href="cool-website.css"','href="../cool-website.css"')
 s=re.sub(r'(src|href|poster|data-scroll-src|data-scroll-src-mobile)="(assets/|config.js|app.js|cool-website.js|language.js)',r'\1="../\2',s)
 s=s.replace('<link rel="canonical" href="https://haenggi.vip/">','<link rel="canonical" href="https://haenggi.vip/en/">').replace('<meta property="og:url" content="https://haenggi.vip/">','<meta property="og:url" content="https://haenggi.vip/en/">')
 s=s.replace('href="./?lang=de" lang="de" hreflang="de" aria-current="page"','href="../?lang=de" lang="de" hreflang="de"').replace('href="en/?lang=en" lang="en" hreflang="en"','href="./?lang=en" lang="en" hreflang="en" aria-current="page"')

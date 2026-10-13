@@ -18,3 +18,15 @@
 
 .hero-bottom{position:relative}.hero-motion{position:absolute;right:0;bottom:65px;background:rgba(8,12,19,.8)}
 @media(max-width:600px){.hero-motion{bottom:auto;top:-56px;right:0;width:auto;min-height:40px;font-size:11px}}
+/* QA: stable legibility over bright film frames, roomy controls and seven apps. */
+.collection-heading,.section-heading{position:relative;isolation:isolate}
+.collection-heading:before,.section-heading:before{content:"";position:absolute;inset:-22px -20px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at left,#080c13e8,transparent 85%)}
+.app-description{color:#c4cddb}.app-link,.store-link{font-size:13px;min-height:46px;padding:13px 16px}.app-card{opacity:1}
+.app-dock a{width:82px;flex-shrink:0}.app-dock{max-width:100%;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#668088 transparent}.app-dock span{white-space:nowrap}
+#openvoicepdf{--accent:124,187,255}#openvideo{--accent:236,210,136}
+.development-grid:has(>.app-card:only-child){grid-template-columns:1fr}.development-grid>.app-card:only-child{max-width:620px}
+@media(max-width:1000px){.hero-bottom{flex-wrap:wrap}.scroll-cue{width:100%;justify-content:space-between}.hero-motion{bottom:auto;top:-56px}.app-dock{width:100%;justify-content:space-between}.app-dock a{width:76px}}
+@media(max-width:600px){.hero-shell{padding-top:125px}.hero{min-height:530px}.app-dock{justify-content:flex-start;gap:5px;padding:8px}.app-dock a{width:62px}.app-dock span{font-size:9px;letter-spacing:-.3px}.app-dock img{width:42px;height:42px}.app-link,.store-link{font-size:12px;gap:13px;padding:13px 15px}.app-description{font-size:15px;line-height:1.7}.development-grid>.app-card:only-child{max-width:none}}
+.collection-heading:before,.section-heading:before{border-radius:40px;filter:blur(14px)}
+.filter-bar{background:linear-gradient(90deg,#080c13d9,#080c1366);border-radius:18px 18px 0 0;padding-top:12px}
+@media(max-width:600px){.app-dock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;overflow:visible}.app-dock a{width:auto;min-height:74px}.hero{min-height:570px}.hero-motion{top:-48px}}
