@@ -1,0 +1,1 @@
+Brand SVG sources: Simple Icons 13.0.0 (CC0), https://github.com/simple-icons/simple-icons/tree/13.0.0/icons — apple.svg, googleplay.svg, github.svg. Globe is project-authored. App buttons inline these SVGs to inherit their foreground color.

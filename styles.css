@@ -35,3 +35,14 @@
 .site-header{position:fixed;z-index:10;padding:16px 5vw;background:rgba(8,12,19,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
 html{scroll-padding-top:100px}
 @media(max-width:600px){.site-header{padding:12px 20px}html{scroll-padding-top:90px}}
+/* Equal action targets with recognizable platform icons. */
+.app-actions{gap:10px}
+.app-actions .app-link,.app-actions .store-link{width:160px;height:48px;min-height:48px;flex:0 0 160px;padding:0 14px;gap:10px;font-size:12px;line-height:1;justify-content:flex-start}
+.button-icon{display:block;width:20px;height:20px;flex:0 0 20px;fill:currentColor}
+.button-label{white-space:nowrap;opacity:1!important}
+.button-arrow{margin-left:auto;font-size:16px;opacity:.65}
+.app-actions .app-link .button-icon{color:#17383d}.app-actions .store-link .button-icon{color:#dce7ee}
+@media(max-width:600px){.app-actions .app-link,.app-actions .store-link{width:100%;flex-basis:100%;height:48px;padding:0 18px;font-size:13px}}
+.site-header .nav-github{display:inline-flex;align-items:center;gap:7px}.nav-icon{width:16px;height:16px;fill:currentColor}
+.digital .app-actions{min-height:106px;align-content:flex-start;align-items:flex-start}
+@media(max-width:600px){.site-header nav .nav-github{display:none}.digital .app-actions{min-height:0}}
