@@ -7,6 +7,8 @@ translations={
 'Entdecke IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF und openVideo: Apps für Technik, Dateien, Reisen, Spiele, Musik und Dokumente.': 'Discover IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF and openVideo: apps for engineering, files, travel, games, music and documents.',
 'OpenVoice PDF öffnet PDF, TXT, Markdown und HTML. Text aus Scans erkennen und Dokumente mit lokalen Stimmen vorlesen lassen.': 'OpenVoice PDF opens PDF, TXT, Markdown and HTML. Recognize text in scans and listen to documents read aloud with local voices.',
 'openVideo bearbeitet Videos direkt auf dem Gerät. Objekten automatisch folgen, Zoom und Tempo anpassen, Clips schneiden und exportieren.': 'openVideo edits videos on your device. Automatically follow objects, adjust zoom and speed, trim clips and export your videos.',
+'OpenGroove-Handbuch lesen':'Read the OpenGroove manual in German',
+'>Handbuch<':'>Manual (DE)<',
 'Videoeditor': 'Video editor',
 '>7 Apps<': '>7 apps<',
 'Apps und PCB-Werkzeuge':'Apps and PCB tools',
@@ -19,7 +21,7 @@ translations={
 'OpenCommander ist ein Dateimanager mit zwei Fenstern. Dateien per Drag & Drop verschieben und ZIP-Archive durchsuchen.':'OpenCommander is a dual-pane file manager. Move files with drag and drop and browse ZIP archives.',
 'TravelTrack ist ein digitales Reisetagebuch: Stopps, Fotos und Videos festhalten und Reiserouten auf einer interaktiven 3D-Weltkarte erkunden.':'TravelTrack is a digital travel journal. Save stops, photos and videos, and explore your routes on an interactive 3D world map.',
 'OpenGames vereint Schach, Dame, Mühle, Reversi, Vier Gewinnt und Tic-Tac-Toe. Die Brettspiele lokal, gegen Bots oder online spielen.':"OpenGames brings together chess, checkers, Nine Men's Morris, Reversi, Connect Four and tic-tac-toe. Play locally, against bots or online.",
-'OpenGroove ist ein Musikplayer für lokale Musikdateien und Alben. Die Musiksammlung verwalten und fehlende Metadaten auf Wunsch ergänzen.':'OpenGroove is a music player for local audio files and albums. Organize your music collection and optionally fill in missing metadata.',
+'Deine Musik, übersichtlich an einem Ort. OpenGroove spielt lokale Titel und Alben, organisiert Playlists und Favoriten und hilft beim Ergänzen von Covern und Metadaten. Mit Backups nimmst du deine Sammlung mit.':'Your music, all in one place. OpenGroove plays local tracks and albums, organizes playlists and favorites, and helps you fill in cover art and metadata. Take your collection with you using backups.',
 'Eine App zum Lernen. Weitere Funktionen werden mit der Veröffentlichung vorgestellt.':'An app for learning. More features will be introduced at launch.',
 'Eine App rund um PDF-Dokumente, Texterkennung und Sprache.':'An app for PDF documents, text recognition and speech.',
 'Ein Videoprojekt in Entwicklung. Details folgen zur Veröffentlichung.':'A video project in development. Details will be shared at launch.',
@@ -40,4 +42,5 @@ s=s.replace('aria-label="Sprache"','aria-label="Language"')
 m=re.search(r'<script type="application/ld\+json">(.*?)</script>',s,re.S)
 data=json.loads(m[1]);page=data['@graph'][1];page['@id']='https://haenggi.vip/en/#page';page['url']='https://haenggi.vip/en/'
 s=s[:m.start(1)]+'\n'+json.dumps(data,ensure_ascii=False,indent=2)+'\n'+s[m.end(1):]
+s=s.replace('href="opengroove/handbuch/"','href="../opengroove/handbuch/"')
 (root/'en').mkdir(exist_ok=True);(root/'en/index.html').write_text(s)
