@@ -46,3 +46,19 @@ html{scroll-padding-top:100px}
 .site-header .nav-github{display:inline-flex;align-items:center;gap:7px}.nav-icon{width:16px;height:16px;fill:currentColor}
 .digital .app-actions{min-height:106px;align-content:flex-start;align-items:flex-start}
 @media(max-width:600px){.site-header nav .nav-github{display:none}.digital .app-actions{min-height:0}}
+
+/* Detailed OpenGroove overview, kept readable within the app grid. */
+#opengroove .app-description{margin-bottom:16px}
+.app-details{padding:0;margin:0 0 28px;list-style:none;color:#c4cddb;font-size:14px;line-height:1.7}
+.app-details li+li{margin-top:12px}.app-details strong{color:#f0f3f8;font-weight:600}
+@media(max-width:600px){.app-details{font-size:15px}}
+/* Give the expanded music overview room without stretching its neighbor. */
+@media(min-width:901px){
+#opengames,#opengroove{grid-column:1/-1;display:grid;grid-template-columns:minmax(240px,.8fr) minmax(0,1.2fr);column-gap:48px}
+#opengames .app-identity{align-self:center}#opengames .app-description{margin-top:0}#opengames .app-actions{min-height:48px}
+#opengroove .card-info{display:contents}#opengroove .app-identity{grid-column:1;grid-row:1;align-self:start}
+#opengroove .app-description{grid-column:1;grid-row:2;margin-bottom:24px}
+#opengroove .app-details{grid-column:2;grid-row:1/4;margin:0;padding-left:32px;border-left:1px solid var(--line);font-size:15px}
+#opengroove .app-actions{grid-column:1;grid-row:3;min-height:0;align-self:end}
+}
+@media(min-width:601px) and (max-width:900px){#opengroove,#opengames{grid-column:1/-1}}

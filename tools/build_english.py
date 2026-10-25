@@ -4,6 +4,15 @@ import json,re
 root=Path(__file__).resolve().parents[1]
 s=(root/'index.html').read_text()
 translations={
+'Musik hinzufügen:':'Add your music:',
+' Android liest freigegebene Audiodateien ein. Auf dem iPhone verbindest du Musikordner oder Apples Musikmediathek und kannst einzelne Dateien importieren.':' Android reads audio files you allow it to access. On iPhone, connect music folders or Apple’s music library, or import individual files.',
+'Wiedergabe gestalten:':'Make playback yours:',
+' Favoriten markieren, die Abspielliste bearbeiten sowie Zufall und Wiederholung nutzen. Auf dem iPhone hilft zusätzlich ein Sleep-Timer beim Einschlafen.':' Mark favorites, edit the play queue, and use shuffle and repeat. On iPhone, a sleep timer can also stop playback when it is time to rest.',
+'Sammlung aufräumen:':'Organize your collection:',
+' Titelangaben manuell korrigieren, online nach Metadaten und Covern suchen und unerwünschte Titel oder Ordner ausblenden, ohne die Dateien zu löschen.':' Correct track information manually, search online for metadata and cover art, and hide unwanted tracks or folders without deleting the files.',
+'Sichern und mitnehmen:':'Back up and transfer:',
+' Alben, Playlists oder die Bibliothek als OpenGroove-Backup sichern und zwischen Android und iPhone übertragen. Bei Apples Musikmediathek werden Angaben und Zuordnungen gesichert, nicht die Audiodateien.':' Save albums, playlists or your library as an OpenGroove backup and transfer them between Android and iPhone. For Apple’s music library, backups contain information and associations, not the audio files.',
+
 'Entdecke IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF und openVideo: Apps für Technik, Dateien, Reisen, Spiele, Musik und Dokumente.': 'Discover IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF and openVideo: apps for engineering, files, travel, games, music and documents.',
 'OpenVoice PDF öffnet PDF, TXT, Markdown und HTML. Text aus Scans erkennen und Dokumente mit lokalen Stimmen vorlesen lassen.': 'OpenVoice PDF opens PDF, TXT, Markdown and HTML. Recognize text in scans and listen to documents read aloud with local voices.',
 'openVideo bearbeitet Videos direkt auf dem Gerät. Objekten automatisch folgen, Zoom und Tempo anpassen, Clips schneiden und exportieren.': 'openVideo edits videos on your device. Automatically follow objects, adjust zoom and speed, trim clips and export your videos.',
@@ -21,7 +30,7 @@ translations={
 'OpenCommander ist ein Dateimanager mit zwei Fenstern. Dateien per Drag & Drop verschieben und ZIP-Archive durchsuchen.':'OpenCommander is a dual-pane file manager. Move files with drag and drop and browse ZIP archives.',
 'TravelTrack ist ein digitales Reisetagebuch: Stopps, Fotos und Videos festhalten und Reiserouten auf einer interaktiven 3D-Weltkarte erkunden.':'TravelTrack is a digital travel journal. Save stops, photos and videos, and explore your routes on an interactive 3D world map.',
 'OpenGames vereint Schach, Dame, Mühle, Reversi, Vier Gewinnt und Tic-Tac-Toe. Die Brettspiele lokal, gegen Bots oder online spielen.':"OpenGames brings together chess, checkers, Nine Men's Morris, Reversi, Connect Four and tic-tac-toe. Play locally, against bots or online.",
-'Deine Musik, übersichtlich an einem Ort. OpenGroove spielt lokale Titel und Alben, organisiert Playlists und Favoriten und hilft beim Ergänzen von Covern und Metadaten. Mit Backups nimmst du deine Sammlung mit.':'Your music, all in one place. OpenGroove plays local tracks and albums, organizes playlists and favorites, and helps you fill in cover art and metadata. Take your collection with you using backups.',
+'OpenGroove ist dein Musikplayer für die eigene Sammlung auf Android und iPhone, ohne OpenGroove-Benutzerkonto. Höre lokale Audiodateien, entdecke deine Musik nach Titeln, Interpreten, Alben und Genres und stelle persönliche Playlists zusammen.':'OpenGroove is a music player for your own collection on Android and iPhone, with no OpenGroove account required. Listen to local audio files, browse tracks, artists, albums and genres, and create personal playlists.',
 'Eine App zum Lernen. Weitere Funktionen werden mit der Veröffentlichung vorgestellt.':'An app for learning. More features will be introduced at launch.',
 'Eine App rund um PDF-Dokumente, Texterkennung und Sprache.':'An app for PDF documents, text recognition and speech.',
 'Ein Videoprojekt in Entwicklung. Details folgen zur Veröffentlichung.':'A video project in development. Details will be shared at launch.',
@@ -33,7 +42,7 @@ translations={
 }
 for de,en in translations.items():s=s.replace(de,en)
 s=s.replace('<html lang="de">','<html lang="en">').replace('"inLanguage": "de"','"inLanguage": "en"').replace('content="de_DE"','content="en_US"')
-s=s.replace('href="styles.css?v=20261013-buttons"','href="../styles.css?v=20261013-buttons"').replace('href="cool-website.css"','href="../cool-website.css"')
+s=s.replace('href="styles.css?v=20261025-opengroove"','href="../styles.css?v=20261025-opengroove"').replace('href="cool-website.css"','href="../cool-website.css"')
 s=re.sub(r'(src|href|poster|data-scroll-src|data-scroll-src-mobile)="(assets/|config.js|app.js|cool-website.js|language.js)',r'\1="../\2',s)
 s=s.replace('<link rel="canonical" href="https://haenggi.vip/">','<link rel="canonical" href="https://haenggi.vip/en/">').replace('<meta property="og:url" content="https://haenggi.vip/">','<meta property="og:url" content="https://haenggi.vip/en/">')
 s=s.replace('href="./?lang=de" lang="de" hreflang="de" aria-current="page"','href="../?lang=de" lang="de" hreflang="de"').replace('href="en/?lang=en" lang="en" hreflang="en"','href="./?lang=en" lang="en" hreflang="en" aria-current="page"')
