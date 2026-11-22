@@ -7,7 +7,7 @@ const video=document.querySelector('#hero-video');
 let videoFrame=0,videoLoaded=false;
 // Every visit starts with the requested cinematic scroll effect enabled.
 // Pausing applies only to the currently open page.
-let paused=false,pending=false,engine;
+let paused=false,pending=false;
 const clamp=n=>Math.min(1,Math.max(0,n));
 // The fixed background remains visible beyond the hero. Its timeline therefore
 // follows the entire document, without holding the reader in a pinned intro.
@@ -24,10 +24,8 @@ function loadVideo(){
  videoLoaded=true;
  const source=innerWidth<=600?video.dataset.scrollSrcMobile:video.dataset.scrollSrc;
  video.preload='auto';
- video.src=source;
- video.load();
- // A fully downloaded source supports arbitrary seeks even when a browser or
- // intermediary defers range requests for a paused video. Native URL is fallback.
+ // Fetch once as a blob so arbitrary scroll seeks never stall on range requests.
+ // Fall back to the native URL only if fetch fails or times out.
  const controller=new AbortController();
  const timeout=setTimeout(()=>controller.abort(),45000);
  fetch(source,{signal:controller.signal}).then(response=>{
@@ -36,8 +34,10 @@ function loadVideo(){
  }).then(blob=>{
   video.src=URL.createObjectURL(blob);
   video.load();
- }).catch(()=>{/* Keep the native URL and poster if download fails. */})
- .finally(()=>clearTimeout(timeout));
+ }).catch(()=>{
+  video.src=source;
+  video.load();
+ }).finally(()=>clearTimeout(timeout));
 }
 video.addEventListener('loadeddata',()=>{document.body.classList.add('video-ready');queueVideo();});
 ['loadedmetadata','canplay','progress','seeked'].forEach(event=>video.addEventListener(event,queueVideo));
@@ -58,7 +58,7 @@ function applyMotion(){
   button.setAttribute('aria-pressed',String(paused));
   button.textContent=english?(paused?'Enable scroll video':'Pause scroll video'):(paused?'Scroll-Video aktivieren':'Scroll-Video pausieren');
  });
- engine?.layout();loadVideo();schedule();
+ loadVideo();schedule();
 }
 buttons.forEach(button=>button.addEventListener('click',()=>{
  paused=!paused;
@@ -114,6 +114,5 @@ document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('c
 }));
 addEventListener('hashchange',()=>{if(published.some(card=>'#'+card.id===location.hash&&card.hidden))filterApps('all');});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedule();});
-if(window.CoolWebsite)engine=window.CoolWebsite.mount(document.body);
-applyMotion();addEventListener('load',()=>engine?.layout());
+applyMotion();
 })();
