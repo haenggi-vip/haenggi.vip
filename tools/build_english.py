@@ -4,6 +4,8 @@ import json,re
 root=Path(__file__).resolve().parents[1]
 s=(root/'index.html').read_text()
 translations={
+'Mit OpenLearn lernst du neun Sprachen in kurzen Lektionen. Ein Einstufungstest hilft dir, auf dem passenden Niveau einzusteigen. Mit Hör- und Textaufgaben sowie gezielten Wiederholungen vertiefst du das Gelernte.': 'Learn nine languages with short lessons in OpenLearn. A placement test helps you start at the right level. Practice with listening and reading exercises and review the material you find difficult.',
+'>Sprachen lernen<': '>Language learning<',
 'Musik hinzufügen:':'Add your music:',
 ' Android liest freigegebene Audiodateien ein. Auf dem iPhone verbindest du Musikordner oder Apples Musikmediathek und kannst einzelne Dateien importieren.':' Android reads audio files you allow it to access. On iPhone, connect music folders or Apple’s music library, or import individual files.',
 'Wiedergabe gestalten:':'Make playback yours:',
@@ -13,13 +15,13 @@ translations={
 'Sichern und mitnehmen:':'Back up and transfer:',
 ' Alben, Playlists oder die Bibliothek als OpenGroove-Backup sichern und zwischen Android und iPhone übertragen. Bei Apples Musikmediathek werden Angaben und Zuordnungen gesichert, nicht die Audiodateien.':' Save albums, playlists or your library as an OpenGroove backup and transfer them between Android and iPhone. For Apple’s music library, backups contain information and associations, not the audio files.',
 
-'Entdecke IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF und openVideo: Apps für Technik, Dateien, Reisen, Spiele, Musik und Dokumente.': 'Discover IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF and openVideo: apps for engineering, files, travel, games, music and documents.',
-'OpenVoice PDF öffnet PDF, TXT, Markdown und HTML. Text aus Scans erkennen und Dokumente mit lokalen Stimmen vorlesen lassen.': 'OpenVoice PDF opens PDF, TXT, Markdown and HTML. Recognize text in scans and listen to documents read aloud with local voices.',
-'openVideo bearbeitet Videos direkt auf dem Gerät. Objekten automatisch folgen, Zoom und Tempo anpassen, Clips schneiden und exportieren.': 'openVideo edits videos on your device. Automatically follow objects, adjust zoom and speed, trim clips and export your videos.',
+'Entdecke IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF, openVideo und OpenLearn: Apps für Technik und Alltag.': 'Discover IDX-Viewer, OpenCommander, TravelTrack, OpenGames, OpenGroove, OpenVoice PDF, openVideo and OpenLearn: tools for engineering and everyday life.',
+'Mit OpenVoice PDF liest du PDF, TXT, Markdown und HTML oder lässt sie dir vorlesen. Die App erkennt Text in gescannten PDFs direkt auf dem Gerät. Nach dem Download des Stimmpakets funktioniert das Vorlesen auch offline.': 'With OpenVoice PDF you can read or listen to PDF, TXT, Markdown and HTML documents. The app recognizes text in scanned PDFs on your device. Narration also works offline after downloading the voice pack.',
+'Mit openVideo schneidest du Clips, passt Zoom und Tempo an und verfolgst Motive automatisch. Exportiere das fertige Video direkt auf deinem Gerät.': 'With openVideo you can trim clips, adjust zoom and speed, and track subjects automatically. Export the finished video directly on your device.',
 'OpenGroove-Handbuch lesen':'Read the OpenGroove manual in German',
 '>Handbuch<':'>Manual (DE)<',
 'Videoeditor': 'Video editor',
-'>7 Apps<': '>7 apps<',
+'>8 Apps<': '>8 apps<',
 'Apps und PCB-Werkzeuge':'Apps and PCB tools',
 'Scroll-Video pausieren':'Pause scroll video',
 '>5 Apps<':'>5 apps<',
@@ -42,7 +44,7 @@ translations={
 }
 for de,en in translations.items():s=s.replace(de,en)
 s=s.replace('<html lang="de">','<html lang="en">').replace('"inLanguage": "de"','"inLanguage": "en"').replace('content="de_DE"','content="en_US"')
-s=s.replace('href="styles.css?v=20261025-opengroove"','href="../styles.css?v=20261025-opengroove"').replace('href="cool-website.css"','href="../cool-website.css"')
+s=s.replace('href="styles.css?v=20261122-stores"','href="../styles.css?v=20261122-stores"').replace('href="cool-website.css"','href="../cool-website.css"')
 s=re.sub(r'(src|href|poster|data-scroll-src|data-scroll-src-mobile)="(assets/|config.js|app.js|cool-website.js|language.js)',r'\1="../\2',s)
 s=s.replace('<link rel="canonical" href="https://haenggi.vip/">','<link rel="canonical" href="https://haenggi.vip/en/">').replace('<meta property="og:url" content="https://haenggi.vip/">','<meta property="og:url" content="https://haenggi.vip/en/">')
 s=s.replace('href="./?lang=de" lang="de" hreflang="de" aria-current="page"','href="../?lang=de" lang="de" hreflang="de"').replace('href="en/?lang=en" lang="en" hreflang="en"','href="./?lang=en" lang="en" hreflang="en" aria-current="page"')
