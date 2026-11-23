@@ -8,15 +8,19 @@ let videoFrame=0,videoLoaded=false;
 // Every visit starts with the requested cinematic scroll effect enabled.
 // Pausing applies only to the currently open page.
 let paused=false,pending=false;
+let targetProgress=0,smoothProgress=0,scrubFrame=0;
+const cardState=new WeakMap();
 const clamp=n=>Math.min(1,Math.max(0,n));
 // The fixed background remains visible beyond the hero. Its timeline therefore
-// follows the entire document, without holding the reader in a pinned intro.
+// follows the entire document, with smooth LERP scrubbing over All-Intra frames.
 function syncVideo(){
  videoFrame=0;
- if(document.hidden||paused||video.readyState<1||video.seeking||!Number.isFinite(video.duration))return;
- const progress=clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight));
- const target=progress*Math.max(0,video.duration-0.05);
- if(Math.abs(video.currentTime-target)>.035)video.currentTime=target;
+ if(document.hidden||paused||video.readyState<1||!Number.isFinite(video.duration))return;
+ const diff=targetProgress-smoothProgress;
+ smoothProgress=Math.abs(diff)<0.0008?targetProgress:smoothProgress+diff*0.22;
+ const target=smoothProgress*Math.max(0,video.duration-0.04);
+ if(!video.seeking&&Math.abs(video.currentTime-target)>.008)video.currentTime=target;
+ if(Math.abs(targetProgress-smoothProgress)>=0.0008)queueVideo();
 }
 function queueVideo(){if(!videoFrame)videoFrame=requestAnimationFrame(syncVideo);}
 function loadVideo(){
@@ -45,12 +49,21 @@ video.addEventListener('error',()=>document.body.classList.remove('video-ready')
 addEventListener('pageshow',queueVideo);
 function render(){
  pending=false;
- queueVideo();
  document.body.classList.toggle('header-scrolled',scrollY>32);
  const progress=clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight));
+ targetProgress=progress;
+ queueVideo();
  document.querySelector('#scroll-value').textContent=String(Math.round(progress*100)).padStart(2,'0');
  document.querySelector('#progress-fill').style.transform=`scaleY(${progress})`;
- cards.forEach(card=>{const p=paused?1:clamp((innerHeight-card.getBoundingClientRect().top)/(innerHeight*.26));card.style.opacity=1;card.style.transform=`perspective(1000px) translateY(${(1-p)*18}px) rotateX(${(1-p)*3}deg)`;});
+ // Batch all layout reads first, then write transforms only when changed.
+ const vh=innerHeight;
+ const next=cards.map(card=>paused?1:clamp((vh-card.getBoundingClientRect().top)/(vh*.24)));
+ cards.forEach((card,i)=>{
+  const p=Math.round(next[i]*100)/100;
+  if(cardState.get(card)===p)return;
+  cardState.set(card,p);
+  card.style.transform=p>=1?'none':`translate3d(0,${((1-p)*14).toFixed(1)}px,0)`;
+ });
 }
 function schedule(){if(!pending){pending=true;requestAnimationFrame(render);}}
 function applyMotion(){

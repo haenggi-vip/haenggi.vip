@@ -213,7 +213,10 @@ html{scroll-padding-top:100px}
 
 /* 5) Precision dark cards: top specular edge, mouse spotlight & platform badges. */
 .app-card {
-  background: linear-gradient(160deg, rgba(17, 26, 39, .88), rgba(8, 13, 22, .93));
+  background: linear-gradient(160deg, rgba(14, 22, 34, .92), rgba(8, 13, 22, .96));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  contain: layout style paint;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 12px 36px rgba(0, 0, 0, .32);
 }
 .app-card:before {
