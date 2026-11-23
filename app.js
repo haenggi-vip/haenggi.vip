@@ -46,8 +46,9 @@ addEventListener('pageshow',queueVideo);
 function render(){
  pending=false;
  queueVideo();
+ document.body.classList.toggle('header-scrolled',scrollY>32);
  const progress=clamp(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight));
- document.querySelector('#scroll-value').textContent=Math.round(progress*100);
+ document.querySelector('#scroll-value').textContent=String(Math.round(progress*100)).padStart(2,'0');
  document.querySelector('#progress-fill').style.transform=`scaleY(${progress})`;
  cards.forEach(card=>{const p=paused?1:clamp((innerHeight-card.getBoundingClientRect().top)/(innerHeight*.26));card.style.opacity=1;card.style.transform=`perspective(1000px) translateY(${(1-p)*18}px) rotateX(${(1-p)*3}deg)`;});
 }
@@ -56,9 +57,22 @@ function applyMotion(){
  document.body.classList.toggle('motion-off',paused);
  buttons.forEach(button=>{
   button.setAttribute('aria-pressed',String(paused));
-  button.textContent=english?(paused?'Enable scroll video':'Pause scroll video'):(paused?'Scroll-Video aktivieren':'Scroll-Video pausieren');
+  const label=english?(paused?'Enable scroll video':'Pause scroll video'):(paused?'Scroll-Video aktivieren':'Scroll-Video pausieren');
+  button.innerHTML='<span class="motion-label"></span>';
+  button.firstChild.textContent=label;
+  button.title=label;
  });
  loadVideo();schedule();
+}
+if(matchMedia('(hover: hover)').matches){
+ cards.forEach(card=>{
+  card.addEventListener('pointermove',event=>{
+   if(paused)return;
+   const rect=card.getBoundingClientRect();
+   card.style.setProperty('--mx',`${event.clientX-rect.left}px`);
+   card.style.setProperty('--my',`${event.clientY-rect.top}px`);
+  },{passive:true});
+ });
 }
 buttons.forEach(button=>button.addEventListener('click',()=>{
  paused=!paused;

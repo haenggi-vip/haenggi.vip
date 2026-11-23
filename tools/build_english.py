@@ -49,6 +49,7 @@ translations={
 'Eine App zum Lernen. Weitere Funktionen werden mit der Veröffentlichung vorgestellt.':'An app for learning. More features will be introduced at launch.',
 'Eine App rund um PDF-Dokumente, Texterkennung und Sprache.':'An app for PDF documents, text recognition and speech.',
 'Ein Videoprojekt in Entwicklung. Details folgen zur Veröffentlichung.':'A video project in development. Details will be shared at launch.',
+'3D-Engineering-Tools und native Apps für Alltag, Medien und Lernen.': '3D engineering tools and native apps for everyday life, media, and learning.',
 'VON DER LEITERPLATTE BIS ZUR WELTREISE':'FROM CIRCUIT BOARDS TO WORLD TRAVELS',
 'Werkzeuge für Technik.<br>Apps für jeden Tag.':'Tools for engineering.<br>Apps for everyday life.',
 'Was als Nächstes kommt.':"What’s coming next.",
